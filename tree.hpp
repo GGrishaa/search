@@ -14,7 +14,6 @@ class leaf {
   ~leaf() = default;
   void add_right(leaf* new_leaf);
   void add_left(leaf* new_leaf);
-  void add_here(flat* new_flat);
   bool right_free() const;
   bool left_free() const;
   bool here_free() const;
@@ -40,7 +39,6 @@ class tree {
 
  private:
   leaf* top;
-  friend void clear_subtree(leaf*);
 };
 
 void fill_tree(tree* tr, flat* flats, size_t size);

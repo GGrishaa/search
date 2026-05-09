@@ -15,8 +15,6 @@ void leaf::add_left(leaf* new_leaf) {
   }
 }
 
-void leaf::add_here(flat* new_flat) { here = new_flat; }
-
 bool leaf::right_free() const { return !right; }
 
 bool leaf::left_free() const { return !left; }

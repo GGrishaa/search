@@ -42,3 +42,5 @@ clang:
 	clear
 
 rebuild: clean search
+
+.PHONY = all search clean clang rebuild gen
