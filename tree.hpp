@@ -19,13 +19,17 @@ class leaf {
   bool here_free() const;
   bool operator>=(flat* other) const;
   bool operator<(flat* other) const;
+  bool operator>=(const string& key) const;
+  bool operator<(const string& key) const;
+  bool operator==(const string& key) const;
   leaf* get_right() const;
   leaf* get_left() const;
+  flat* get_here() const;
 
  private:
-  flat* here;
-  leaf* left;
-  leaf* right;
+  flat* here_;
+  leaf* left_;
+  leaf* right_;
 };
 
 class tree {
@@ -36,9 +40,11 @@ class tree {
   ~tree();
   bool top_free() const;
   void add_elem(flat* new_elem);
+  flat* find(const string& key, size_t& size) const;
 
  private:
-  leaf* top;
+  leaf* top_;
+  size_t size_;
 };
 
 void fill_tree(tree* tr, flat* flats, size_t size);

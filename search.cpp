@@ -16,4 +16,14 @@ size_t linear_search(flat* flats, size_t size, flat* find, string key) {
   return ans;
 }
 
-int main() { return 0; }
+int main() {
+  size_t s;
+  flat* flats = load_from_csv("CSV/apartments_100.csv", s);
+  tree tr;
+  fill_tree(&tr, flats, s);
+  flat* find = tr.find("Миронова Ирина Алексеевна", s);
+  print_flats(find, s, cout);
+  delete[] flats;
+  delete[] find;
+  return 0;
+}

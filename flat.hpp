@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <ostream>
 #include <sstream>
 #include <string>
 
@@ -22,15 +23,16 @@ class flat {
   bool operator!=(const flat& other) const;
   bool operator==(const string& owner) const;
   string get_owner() const;
-  void print(ostream& os) const;
+
+  friend ostream& operator<<(ostream& os, const flat& f);
 
  private:
-  long home_n;
-  long flat_n;
-  long room_c;
-  double s;
-  string owner;
-  long vil_c;
+  long home_n_;
+  long flat_n_;
+  long room_c_;
+  double s_;
+  string owner_;
+  long vil_c_;
 };
 
 void print_flats(flat* flats, size_t size, ostream& os);
