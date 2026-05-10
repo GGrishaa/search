@@ -42,7 +42,7 @@ int main() {
   flat* flats = load_from_csv("CSV/apartments_100.csv", size);
   hash_table table(101);
   fill_table(&table, flats, size);
-  flat* find = table.find("Львов Руслан Николаевич", size);
+  flat* find = table.find("Соколов Алексей Владимирович", size);
   print_flats(find, size, cout);
   cout << count_collisions(find, size) << endl;
   delete[] flats;

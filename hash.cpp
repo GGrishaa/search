@@ -2,7 +2,7 @@
 
 int index(const char& ch, const string& alph) {
   int a = alph.find(ch);
-  if (a == string::npos) a = 0;
+  if (a == string::npos) a = alph.find(' ');
   return a + 1;
 }
 
@@ -81,7 +81,7 @@ int fill_table(hash_table* table, flat* flats, const size_t& size) {
   return s;
 }
 
-int count_collisions(flat* flats, const size_t& size) {
+size_t count_collisions(flat* flats, const size_t& size) {
   vector<long long> unique_hash;
   int collisions = 0;
   for (size_t i = 0; i < size; ++i) {
