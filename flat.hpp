@@ -3,7 +3,6 @@
 
 #include <fstream>
 #include <iostream>
-#include <ostream>
 #include <sstream>
 #include <string>
 
@@ -113,7 +112,7 @@ class flat {
    * Возвращает строковый ключ объекта, который является ФИО владельца квартиры
    * @return ФИО владельца
    */
-  string get_owner() const;
+  const string& get_owner() const;
 
   /**
    * @brief Оператор вывода в поток

@@ -59,7 +59,7 @@ bool flat::operator==(const string& owner) const {
   return this->owner_ == owner;
 }
 
-string flat::get_owner() const { return this->owner_; }
+const string& flat::get_owner() const { return this->owner_; }
 
 void print_flats(flat* flats, size_t size, ostream& os) {
   for (size_t i = 0; i < size; ++i) {

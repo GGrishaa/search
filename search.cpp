@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "flat.hpp"
+#include "hash.hpp"
 #include "tree.hpp"
 using namespace std;
 
@@ -37,12 +38,13 @@ size_t linear_search(flat* flats, size_t size, flat* find, string key) {
  * @brief Точка начала работы программы
  */
 int main() {
-  size_t s;
-  flat* flats = load_from_csv("CSV/apartments_100.csv", s);
-  tree tr;
-  fill_tree(&tr, flats, s);
-  flat* find = tr.find("Миронова Ирина Алексеевна", s);
-  print_flats(find, s, cout);
+  size_t size;
+  flat* flats = load_from_csv("CSV/apartments_100.csv", size);
+  hash_table table(101);
+  fill_table(&table, flats, size);
+  flat* find = table.find("Львов Руслан Николаевич", size);
+  print_flats(find, size, cout);
+  cout << count_collisions(find, size) << endl;
   delete[] flats;
   delete[] find;
   return 0;

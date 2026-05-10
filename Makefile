@@ -3,13 +3,16 @@ GXX=g++
 all: search
 	./search
 
-search: flat.o tree.o search.o
+search: flat.o tree.o search.o hash.o
 	$(GXX) $^ -o $@
 
 flat.o: flat.cpp flat.hpp
 	$(GXX) $< -c -o $@
 
 tree.o: tree.cpp tree.hpp flat.hpp
+	$(GXX) -c $< -o $@
+
+hash.o: hash.cpp hash.hpp
 	$(GXX) -c $< -o $@
 
 search.o: search.cpp flat.hpp tree.hpp
@@ -28,10 +31,10 @@ gen:
 	python3 gen.py 2500
 	python3 gen.py 7000
 	python3 gen.py 10000
+	python3 gen.py 20000
 	python3 gen.py 30000
 	python3 gen.py 50000
 	python3 gen.py 100000
-	python3 gen.py 200000
 
 clang:
 	touch .clang-format
