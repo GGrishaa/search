@@ -26,7 +26,9 @@ clean:
 	rm -f CSV/*.csv
 	rm -f *.o search
 	echo "" > docs/collisions.txt
-	rm -f docs/collision_plot.png
+	echo "" > docs/times_with_fill.txt
+	echo "" > docs/times_no_fill.txt
+	rm -f docs/plot.png
 	rm -rf docs/html docs/latex
 	clear
 
