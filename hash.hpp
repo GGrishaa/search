@@ -6,6 +6,7 @@
 #define CAPACITY 100003
 #define alphabet \
   "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ -"
+#define MOD ((1ULL << 61) - 1)
 
 #include <algorithm>
 #include <string>
@@ -38,7 +39,7 @@ int index(const char& ch, const string& alph = alphabet);
  * @param str - строка, по которой будет строиться хэш
  * @return целое 64-битное число
  */
-long long my_hash1(const string& str);
+unsigned long long my_hash1(const string& str);
 
 /**
  * @brief Вторая пользовательская хэш-функция (используется для решения
@@ -49,7 +50,7 @@ long long my_hash1(const string& str);
  * @param str - строка, по которой будет строиться хэш
  * @return целое 64-битное число
  */
-long long my_hash2(const string& str);
+unsigned long long my_hash2(const string& str);
 
 /**
  * @brief Класс хэш-таблицы
@@ -118,7 +119,7 @@ class hash_table {
  * @param size - количество квартир в массиве
  * @return количество элементов, которые были успешно добавлены в таблицу
  */
-int fill_table(hash_table* table, flat* flats, const size_t& size);
+size_t fill_table(hash_table* table, flat* flats, const size_t& size);
 
 /**
  * @brief Подсчет коллизий на массиве данных

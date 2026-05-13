@@ -6,21 +6,17 @@ int index(const char& ch, const string& alph) {
   return a + 1;
 }
 
-long long my_hash1(const string& str) {
-  long long p = 1, hash = 0;
-  for (int i = 0; i < str.length(); ++i) {
-    hash += index(str[i]) * p;
-    p *= P1;
-  }
+unsigned long long my_hash1(const string& str) {
+  unsigned long long hash = 0;
+  for (size_t i = 0; i < str.length(); ++i)
+    hash = (hash * P1 + index(str[i])) % MOD;
   return hash;
 }
 
-long long my_hash2(const string& str) {
-  long long p = 1, hash = 0;
-  for (int i = 0; i < str.length(); ++i) {
-    hash += index(str[i]) * p;
-    p *= P2;
-  }
+unsigned long long my_hash2(const string& str) {
+  unsigned long long hash = 0;
+  for (size_t i = 0; i < str.length(); ++i)
+    hash = (hash * P2 + index(str[i])) % MOD;
   return hash;
 }
 
@@ -35,11 +31,11 @@ hash_table::~hash_table() {
 bool hash_table::insert(flat* Flat) {
   if (size_ == capacity_) return false;
   string key = Flat->get_owner();
-  long long h1 = my_hash1(key), h2 = my_hash2(key);
-  int index = h1 % capacity_, step = (h2 % (capacity_ - 1)) + 1;
+  unsigned long long h1 = my_hash1(key), h2 = my_hash2(key);
+  size_t index = h1 % capacity_, step = (h2 % (capacity_ - 1)) + 1;
 
-  for (int k = 0; k < capacity_; ++k) {
-    int pos = (index + k * step) % capacity_;
+  for (size_t k = 0; k < capacity_; ++k) {
+    size_t pos = (index + k * step) % capacity_;
     if (table_[pos] == nullptr) {
       table_[pos] = new flat(*Flat);
       ++size_;
@@ -52,11 +48,11 @@ bool hash_table::insert(flat* Flat) {
 flat* hash_table::find(const string& key, size_t& size) const {
   size = 0;
   flat* res = new flat[capacity_];
-  long long h1 = my_hash1(key), h2 = my_hash2(key);
-  int index = h1 % capacity_, step = (h2 % (capacity_ - 1)) + 1;
+  unsigned long long h1 = my_hash1(key), h2 = my_hash2(key);
+  size_t index = h1 % capacity_, step = (h2 % (capacity_ - 1)) + 1;
 
-  for (int k = 0; k < capacity_; ++k) {
-    int pos = (index + k * step) % capacity_;
+  for (size_t k = 0; k < capacity_; ++k) {
+    size_t pos = (index + k * step) % capacity_;
     if (table_[pos] && table_[pos]->get_owner() == key) {
       res[size] = *table_[pos];
       ++size;
@@ -75,15 +71,15 @@ flat* hash_table::find(const string& key, size_t& size) const {
   return res;
 }
 
-int fill_table(hash_table* table, flat* flats, const size_t& size) {
-  int s = 0;
+size_t fill_table(hash_table* table, flat* flats, const size_t& size) {
+  size_t s = 0;
   for (size_t i = 0; i < size; ++i) s += table->insert(flats + i);
   return s;
 }
 
 size_t count_collisions(flat* flats, const size_t& size) {
-  vector<long long> unique_hash;
-  int collisions = 0;
+  vector<unsigned long long> unique_hash;
+  size_t collisions = 0;
   for (size_t i = 0; i < size; ++i) {
     if (find(unique_hash.begin(), unique_hash.end(),
              my_hash1(flats[i].get_owner())) != unique_hash.end())

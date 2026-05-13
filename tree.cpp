@@ -3,6 +3,11 @@
 leaf::leaf(flat* here, leaf* left, leaf* right)
     : here_(here), left_(left), right_(right) {}
 
+leaf::~leaf() {
+  delete here_;
+  here_ = nullptr;
+}
+
 void leaf::add_right(leaf* new_leaf) {
   if (!right_) {
     right_ = new_leaf;
@@ -59,23 +64,24 @@ tree::~tree() { clear_subtree(this->top_); }
 bool tree::top_free() const { return !top_; }
 
 void tree::add_elem(flat* new_elem) {
+  if (!new_elem) return;
   ++size_;
   if (top_free()) {
-    top_ = new leaf(new_elem);
+    top_ = new leaf(new flat(*new_elem));
     return;
   }
   leaf* cur = top_;
   while (true) {
     if (*cur < new_elem) {
       if (cur->right_free()) {
-        cur->add_right(new leaf(new_elem));
+        cur->add_right(new leaf(new flat(*new_elem)));
         break;
       } else {
         cur = cur->get_right();
       }
     } else {
       if (cur->left_free()) {
-        cur->add_left(new leaf(new_elem));
+        cur->add_left(new leaf(new flat(*new_elem)));
         break;
       } else {
         cur = cur->get_left();

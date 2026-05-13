@@ -37,9 +37,9 @@ class leaf {
    */
   leaf& operator=(const leaf& other) = delete;
   /**
-   * @brief Деструктор дефолтный
+   * @brief Деструктор освобождает память выделенную для flat динамически
    */
-  ~leaf() = default;
+  ~leaf();
   /**
    * @brief Установка значения для листа справа
    *

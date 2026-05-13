@@ -12,7 +12,7 @@ flat.o: flat.cpp flat.hpp
 tree.o: tree.cpp tree.hpp flat.hpp
 	$(GXX) -c $< -o $@
 
-hash.o: hash.cpp hash.hpp
+hash.o: hash.cpp hash.hpp flat.hpp
 	$(GXX) -c $< -o $@
 
 search.o: search.cpp flat.hpp tree.hpp
