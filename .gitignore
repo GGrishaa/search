@@ -1,2 +1,4 @@
 .DS_Store
 CSV/*.csv
+*.o
+search
