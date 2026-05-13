@@ -2,8 +2,9 @@ GXX=g++
 
 all: search
 	./search
+	$(MAKE) plot
 
-search: flat.o tree.o search.o hash.o
+search: flat.o tree.o search.o hash.o rb_tree.o
 	$(GXX) $^ -o $@
 
 flat.o: flat.cpp flat.hpp
@@ -15,12 +16,18 @@ tree.o: tree.cpp tree.hpp flat.hpp
 hash.o: hash.cpp hash.hpp flat.hpp
 	$(GXX) -c $< -o $@
 
+rb_tree.o: rb_tree.cpp rb_tree.hpp flat.hpp
+	$(GXX) -c $< -o $@
+
 search.o: search.cpp flat.hpp tree.hpp
 	$(GXX) -c $< -o $@
 
 clean:
 	rm -f CSV/*.csv
 	rm -f *.o search
+	echo "" > docs/collisions.txt
+	rm -f docs/collision_plot.png
+	rm -rf docs/html docs/latex
 	clear
 
 gen:
@@ -44,6 +51,13 @@ clang:
 	rm -f .clang-format
 	clear
 
-rebuild: clean search
+plot:
+	python3 plot.py
 
-.PHONY = all search clean clang rebuild gen
+dox:
+	doxygen ./doxygen_config
+	open docs/html/index.html
+
+rebuild: clean all
+
+.PHONY = all search clean clang rebuild gen dox plot

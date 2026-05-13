@@ -4,8 +4,7 @@
 #define P1 73
 #define P2 71
 #define CAPACITY 100003
-#define alphabet \
-  "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ -"
+#define alphabet "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -"
 #define MOD ((1ULL << 61) - 1)
 
 #include <algorithm>

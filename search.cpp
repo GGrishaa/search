@@ -1,8 +1,12 @@
+#include <fstream>
 #include <iostream>
+#include <string>
 
 #include "flat.hpp"
 #include "hash.hpp"
+#include "rb_tree.hpp"
 #include "tree.hpp"
+
 using namespace std;
 
 /**
@@ -34,18 +38,35 @@ size_t linear_search(flat* flats, size_t size, flat* find, string key) {
   return ans;
 }
 
+void collisions_in_file(const string filename) {
+  size_t size;
+  flat* flats = load_from_csv(filename, size);
+  if (!flats) {
+    cerr << "Ошибка: не удалось загрузить файл " << filename << endl;
+    return;
+  }
+  ofstream fout("docs/collisions.txt", ios::app);
+  size_t collisions = count_collisions(flats, size);
+
+  fout << "Размер данных: " << size << " квартир" << endl;
+  fout << "Коллизий: " << collisions << endl;
+  fout.close();
+  delete[] flats;
+}
+
 /**
  * @brief Точка начала работы программы
  */
 int main() {
-  size_t size;
-  flat* flats = load_from_csv("CSV/apartments_100.csv", size);
-  hash_table table(101);
-  fill_table(&table, flats, size);
-  flat* find = table.find("Соколов Алексей Владимирович", size);
-  print_flats(find, size, cout);
-  cout << count_collisions(find, size) << endl;
-  delete[] flats;
-  delete[] find;
+  collisions_in_file("CSV/apartments_100.csv");
+  collisions_in_file("CSV/apartments_600.csv");
+  collisions_in_file("CSV/apartments_1000.csv");
+  collisions_in_file("CSV/apartments_2500.csv");
+  collisions_in_file("CSV/apartments_7000.csv");
+  collisions_in_file("CSV/apartments_10000.csv");
+  collisions_in_file("CSV/apartments_20000.csv");
+  collisions_in_file("CSV/apartments_30000.csv");
+  collisions_in_file("CSV/apartments_50000.csv");
+  collisions_in_file("CSV/apartments_100000.csv");
   return 0;
 }

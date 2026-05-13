@@ -223,6 +223,12 @@ flat* rb_tree::find(const string& key, size_t& size) const {
   }
 }
 
+void fill_rb_tree(rb_tree* tr, flat* flats, size_t size) {
+  for (size_t i = 0; i < size; ++i) {
+    tr->insert(flats + i);
+  }
+}
+
 void clear_rb_subtree(rb_node* l) {
   if (!l) return;
   clear_rb_subtree(l->get_left());

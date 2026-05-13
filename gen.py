@@ -5,34 +5,73 @@ import sys
 
 
 male_first = [
-    'Иван', 'Петр', 'Алексей', 'Дмитрий', 'Сергей', 'Михаил', 'Андрей', 
-    'Владимир', 'Николай', 'Александр', 'Денис', 'Евгений', 'Максим', 
-    'Роман', 'Артем', 'Виктор', 'Константин', 'Олег', 'Павел', 'Станислав', 'Руслан', 'Григорий'
-]
+    'Ivan', 'Petr', 'Alexey', 'Dmitriy', 'Sergey', 'Mihail', 'Andrew', 
+    'Vladimir', 'Nikolas', 'Alex', 'Denis', 'Evgen', 'Max', 
+    'Roman', 'Artem', 'Viktor', 'Konstantin', 'Oleg', 'Pavel', 'Stanislav', 
+    'Ruslan', 'Gregory', 'Boris', 'Gleb', 'Igor', 'Leonid', 'Vadim', 'Yuri', 
+    'Anatoly', 'Valentin', 'Vitaly', 'Timur', 'Rinat', 'Eduard', 'Arkady', 
+    'Stepan', 'Fedor', 'Yaroslav', 'Vladislav', 'Vyacheslav', 'Abram', 'Adam', 
+    'Albert', 'Alfred', 'Anton', 'Arnold', 'Arseny', 'Bogdan', 'Bronislav',
+    'Valery', 'Veniamin', 'Vladlen', 'Vsevolod', 'Gennady', 'Georgy', 'German', 
+    'David', 'Daniel', 'Egor', 'Emil', 'Erast', 'Efim', 'Zakhar', 'Ignat', 'Ilya', 
+    'Innocent', 'Joseph', 'Kazimir', 'Karl', 'Kirill']
   
 female_first = [
-    'Анна', 'Мария', 'Елена', 'Ольга', 'Татьяна', 'Ирина', 'Наталья', 
-    'Светлана', 'Екатерина', 'Юлия', 'Виктория', 'Дарья', 'Елизавета', 
-    'Анастасия', 'Кристина', 'Марина', 'Оксана', 'Инна', 'Людмила', 'Галина'
-]
+    'Ann', 'Maria', 'Lana', 'Olga', 'Tat', 'Irina', 'Natalia', 
+    'Svetlana', 'Ekaterina', 'Julia', 'Viktoria', 'Dar', 'Elizabeth', 
+    'Anastasya', 'Kristina', 'Marina', 'Oksana', 'Inna', 'Ludmila', 
+    'Galina', 'Alina', 'Valeria', 'Veronika', 'Vera', 'Nadezhda', 
+    'Lyubov', 'Zoya', 'Raisa', 'Tamara', 'Ella', 'Nina', 'Polina', 
+    'Sofia', 'Ulyana', 'Yana', 'Larisa', 'Alla', 'Zhanna', 'Ada', 
+    'Adelina', 'Aza', 'Alevtina', 'Alexandra', 'Angelina', 'Antonina', 
+    'Ariadna', 'Bella', 'Bronislava', 'Valentina', 'Vanda', 'Varvara',
+    'Vasilisa', 'Diana', 'Eva', 'Zinaida', 'Inessa', 'Kapitolina', 'Karina',
+    'Kira', 'Claudia', 'Lada', 'Lydia', 'Lilia', 'Lora', 'Maya', 
+    'Margarita', 'Martha', 'Milan']
 
 
 surnames = [
-    'Иванов', 'Петров', 'Сидоров', 'Козлов', 'Смирнов', 'Васильев', 'Попов', 'Никифоров', 'Миронов',
-    'Морозов', 'Волков', 'Федоров', 'Соколов', 'Михайлов', 'Новиков', 'Киселев',
-    'Федоров', 'Кузнецов', 'Голубев', 'Морозов', 'Лебедев', 'Зайцев', 'Топорков',
-    'Быков', 'Макаров', 'Николаев', 'Орлов', 'Павлов', 'Романов', 'Савельев', 'Львов'
-]
+    'Ivanov', 'Petrov', 'Sidorov', 'Kozlov', 'Smirnov', 'Vasilev', 'Popov', 'Nikiforov', 'Mironov',
+    'Morozov', 'Volkov', 'Fedorov', 'Sokolov', 'Mihaylov', 'Novikov', 'Kiselev', 
+    'Kuznetsov', 'Golubev', 'Lebedev', 'Zaytsev', 'Toporkov',
+    'Bikov', 'Makarov', 'Nikolaev', 'Orlov', 'Pavlov', 'Romanov', 'Savelev', 'Lvov', 
+    'Baranov', 'Belov', 'Vinogradov', 'Gromov', 'Egorov', 'Karpov', 'Krylov', 'Lapin', 
+    'Melnikov', 'Naumov', 'Nesterov', 'Panov', 'Rogov', 'Rybakov', 'Samsonov', 'Tikhonov', 
+    'Ustinov', 'Filatov', 'Fomin', 'Shcherbakov', 'Yakovlev', 'Mazitov', 'Yarigin', 'Andreev',
+    'Lukoyanov', 'Danilov', 'Osipov', 'Kazakov', 'Bakeev', 'Alihanov', 'Galitsin', 'Goltsev', 
+    'Guskov', 'Irkov', 'Klepikov', 'Kolbasov', 'Konovalov', 'Osipenkov', 'Pochinov', 'Rakov',
+    'Sirotkon', 'Starodubtsev', 'Timohin', 'Trofimov', 'Zhuravlev', 'Bolotnikov', 'Firsov',
+    'Agenosov', 'Busarev', 'Abramov', 'Avdeev', 'Agafonov', 'Akimov', 'Aksenov', 'Alekseev', 
+    'Anisimov', 'Antipov', 'Antonov', 'Arkhipov', 'Astafyev', 'Afanasyev', 'Baranov', 'Belov', 
+    'Belozerov', 'Belyaev', 'Biryukov', 'Blokhin', 'Bobrov', 'Bobylev', 'Bogdanov', 'Borisov', 
+    'Bragin', 'Budanov', 'Burov', 'Bykov', 'Vasiliev', 'Vinogradov', 'Volkov', 'Vorobyov',
+    'Gavrilov', 'Galkin', 'Gerasimov', 'Glazkov', 'Glebov', 'Golovanov', 'Gorbunov', 'Gordeev', 'Gorin', 'Gorshkov',
+    'Goryachev', 'Grebenshchikov', 'Grigoriev', 'Gromov', 'Gusev', 'Davydov', 'Dementyev', 'Demidov', 'Denisov', 'Dmitriev',
+    'Doroshenko', 'Drozdov', 'Dubov', 'Evdokimov', 'Evseev', 'Eliseev', 'Eremenko', 'Efimov', 'Efremov', 'Zhukov',
+    'Zhuravlev', 'Zaitsev', 'Zakharov', 'Zelenov', 'Zimin', 'Zotov', 'Zykov', 'Ignatiev', 'Ilyin', 'Isaev',
+    'Kazakov', 'Kalashnikov', 'Kalinin', 'Kapustin', 'Kasyanov', 'Klimov', 'Klyuev', 'Kovalev', 'Kolpakov', 'Komarov',
+    'Kondratiev', 'Kopylov', 'Korneev', 'Korolev', 'Korshunov', 'Kostin', 'Kotov', 'Koshkin', 'Krasnov', 'Kudryavtsev']
 
 
-male_patr = ['Иванович', 'Петрович', 'Алексеевич', 'Дмитриевич', 'Сергеевич', 
-             'Михайлович', 'Андреевич', 'Владимирович', 'Николаевич', 
-             'Александрович']
+male_patr = ['Ivanovich', 'Petrovich', 'Alexeevich', 'Dmitrievich', 'Sergeevich', 
+             'Mihailovich', 'Andreevich', 'Vladimirovich', 'Nikolaevich', 
+             'Alexandrovich', 'Borisovich', 'Grigorievich', 'Egorovich', 'Ilyich', 
+             'Kirillovich', 'Leonidovich', 'Olegovich', 'Ruslanovich', 'Stanislavovich', 
+             'Timofeevich', 'Fedorovich', 'Yurievich', 'Abramovich', 'Adamovich', 
+             'Albertovich', 'Alfredovich', 'Anatolievich', 'Antonovich', 'Arkadievich',
+             'Bogdanovich', 'Bronislavovich', 'Vadimovich', 'Valentinovich', 'Valerievich', 
+             'Venediktovich', 'Viktorovich', 'Vilenovich', 'Vladlenovich', 'Vladislavovich', 
+             'Vsevolodovich', 'Gennadievich', 'Georgievich']
 
 
-female_patr = ['Ивановна', 'Петровна', 'Алексеевна', 'Дмитриевна', 'Сергеевна', 
-               'Михайловна', 'Андреевна', 'Владимировна', 'Николаевна', 
-               'Александровна']
+female_patr = ['Ivanovna', 'Petrovna', 'Alexeevna', 'Dmitrievna', 'Sergeevna', 
+               'Mihaylovna', 'Andreevna', 'Vladimirovna', 'Nikolaevna', 
+               'Alexandrovna', 'Borisovna', 'Grigorievna', 'Egorovna', 
+               'Ilinichna', 'Kirillovna', 'Leonidovna', 'Olegovna', 
+               'Ruslanovna', 'Stanislavovna', 'Timofeevna', 'Fedorovna', 'Yurievna', 
+               'Abramovna', 'Adamovna', 'Albertovna', 'Alfredovna', 'Anatolievna', 'Antonovna', 'Arkadievna',
+               'Bogdanovna', 'Bronislavovna', 'Vadimovna', 'Valentinovna', 'Valerievna', 'Venediktovna',
+               'Viktorovna', 'Vilenovna', 'Vladlenovna', 'Vladislavovna', 'Vsevolodovna', 'Gennadievna', 'Georgievna']
 
 
 def generate_fio():
@@ -47,7 +86,7 @@ def generate_fio():
         first = random.choice(female_first)
         patr = random.choice(female_patr)
         surname = random.choice(surnames)
-        return f"{surname}а {first} {patr}"
+        return f"{surname}a {first} {patr}"
 
 
 def main():
@@ -73,8 +112,8 @@ def main():
 
     with open(filename, 'w', newline='', encoding='utf-8') as f:
         writer = csv.writer(f, delimiter=';', quoting=csv.QUOTE_MINIMAL)
-        writer.writerow(['номер_дома', 'номер_квартиры', 'количество_комнат', 
-                         'площадь', 'ФИО_владельца', 'число_проживающих'])
+        writer.writerow(['home_number', 'flat_number', 'room_count', 
+                         'square', 'name', 'vilagers_count'])
         writer.writerows(data)
 
 
