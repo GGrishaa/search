@@ -274,36 +274,36 @@ void fix_time_no_fill(const string& filename) {
  */
 int main() {
   fix_time_with_fill("CSV/apartments_100.csv");
-  fix_time_with_fill("CSV/apartments_600.csv");
-  fix_time_with_fill("CSV/apartments_1000.csv");
   fix_time_with_fill("CSV/apartments_2500.csv");
   fix_time_with_fill("CSV/apartments_7000.csv");
   fix_time_with_fill("CSV/apartments_10000.csv");
   fix_time_with_fill("CSV/apartments_50000.csv");
   fix_time_with_fill("CSV/apartments_100000.csv");
+  fix_time_with_fill("CSV/apartments_250000.csv");
   fix_time_with_fill("CSV/apartments_500000.csv");
+  fix_time_with_fill("CSV/apartments_750000.csv");
   fix_time_with_fill("CSV/apartments_1000000.csv");
 
   fix_time_no_fill("CSV/apartments_100.csv");
-  fix_time_no_fill("CSV/apartments_600.csv");
-  fix_time_no_fill("CSV/apartments_1000.csv");
   fix_time_no_fill("CSV/apartments_2500.csv");
   fix_time_no_fill("CSV/apartments_7000.csv");
   fix_time_no_fill("CSV/apartments_10000.csv");
   fix_time_no_fill("CSV/apartments_50000.csv");
   fix_time_no_fill("CSV/apartments_100000.csv");
+  fix_time_no_fill("CSV/apartments_250000.csv");
   fix_time_no_fill("CSV/apartments_500000.csv");
+  fix_time_no_fill("CSV/apartments_750000.csv");
   fix_time_no_fill("CSV/apartments_1000000.csv");
 
   collisions_in_file("CSV/apartments_100.csv");
-  collisions_in_file("CSV/apartments_600.csv");
-  collisions_in_file("CSV/apartments_1000.csv");
   collisions_in_file("CSV/apartments_2500.csv");
   collisions_in_file("CSV/apartments_7000.csv");
   collisions_in_file("CSV/apartments_10000.csv");
   collisions_in_file("CSV/apartments_50000.csv");
   collisions_in_file("CSV/apartments_100000.csv");
+  collisions_in_file("CSV/apartments_250000.csv");
   collisions_in_file("CSV/apartments_500000.csv");
+  collisions_in_file("CSV/apartments_750000.csv");
   collisions_in_file("CSV/apartments_1000000.csv");
   return 0;
 }
