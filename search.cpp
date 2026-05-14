@@ -135,7 +135,7 @@ void fix_time_with_fill(const string& filename) {
   fout << "Поиск с помощью бинарного дерева:\t\t" << tree_total / 1000.0
        << " мс" << endl;
 
-  hash_table table(prime);
+  hash_table table(prime * 3);
   auto start_hash = chrono::high_resolution_clock::now();
   fill_table(&table, flats, size1);
   flat* find_hash = table.find(key, size2);
@@ -169,7 +169,7 @@ void fix_time_with_fill(const string& filename) {
   }
   auto end_mm = chrono::high_resolution_clock::now();
   double mm_time = chrono::duration<double, milli>(end_mm - start_mm).count();
-  fout << "Поиск с помощью std::multimap:\t\t" << mm_time << " мс" << endl
+  fout << "Поиск с помощью std::multimap:\t\t\t" << mm_time << " мс" << endl
        << endl;
 
   fout.close();
@@ -223,7 +223,7 @@ void fix_time_no_fill(const string& filename) {
   fout << "Поиск с помощью бинарного дерева:\t\t" << tree_total / 1000.0
        << " мс" << endl;
 
-  hash_table table(prime);
+  hash_table table(prime * 3);
   fill_table(&table, flats, size1);
   auto start_hash = chrono::high_resolution_clock::now();
   flat* find_hash = table.find(key, size2);
@@ -257,7 +257,7 @@ void fix_time_no_fill(const string& filename) {
   }
   auto end_mm = chrono::high_resolution_clock::now();
   double mm_time = chrono::duration<double, milli>(end_mm - start_mm).count();
-  fout << "Поиск с помощью std::multimap:\t\t" << mm_time << " мс" << endl
+  fout << "Поиск с помощью std::multimap:\t\t\t" << mm_time << " мс" << endl
        << endl;
 
   fout.close();
@@ -279,10 +279,10 @@ int main() {
   fix_time_with_fill("CSV/apartments_2500.csv");
   fix_time_with_fill("CSV/apartments_7000.csv");
   fix_time_with_fill("CSV/apartments_10000.csv");
-  fix_time_with_fill("CSV/apartments_20000.csv");
-  fix_time_with_fill("CSV/apartments_30000.csv");
   fix_time_with_fill("CSV/apartments_50000.csv");
   fix_time_with_fill("CSV/apartments_100000.csv");
+  fix_time_with_fill("CSV/apartments_500000.csv");
+  fix_time_with_fill("CSV/apartments_1000000.csv");
 
   fix_time_no_fill("CSV/apartments_100.csv");
   fix_time_no_fill("CSV/apartments_600.csv");
@@ -290,10 +290,10 @@ int main() {
   fix_time_no_fill("CSV/apartments_2500.csv");
   fix_time_no_fill("CSV/apartments_7000.csv");
   fix_time_no_fill("CSV/apartments_10000.csv");
-  fix_time_no_fill("CSV/apartments_20000.csv");
-  fix_time_no_fill("CSV/apartments_30000.csv");
   fix_time_no_fill("CSV/apartments_50000.csv");
   fix_time_no_fill("CSV/apartments_100000.csv");
+  fix_time_no_fill("CSV/apartments_500000.csv");
+  fix_time_no_fill("CSV/apartments_1000000.csv");
 
   collisions_in_file("CSV/apartments_100.csv");
   collisions_in_file("CSV/apartments_600.csv");
@@ -301,9 +301,9 @@ int main() {
   collisions_in_file("CSV/apartments_2500.csv");
   collisions_in_file("CSV/apartments_7000.csv");
   collisions_in_file("CSV/apartments_10000.csv");
-  collisions_in_file("CSV/apartments_20000.csv");
-  collisions_in_file("CSV/apartments_30000.csv");
   collisions_in_file("CSV/apartments_50000.csv");
   collisions_in_file("CSV/apartments_100000.csv");
+  collisions_in_file("CSV/apartments_500000.csv");
+  collisions_in_file("CSV/apartments_1000000.csv");
   return 0;
 }

@@ -40,10 +40,10 @@ gen:
 	python3 gen.py 2500
 	python3 gen.py 7000
 	python3 gen.py 10000
-	python3 gen.py 20000
-	python3 gen.py 30000
 	python3 gen.py 50000
 	python3 gen.py 100000
+	python3 gen.py 500000
+	python3 gen.py 1000000
 
 clang:
 	touch .clang-format

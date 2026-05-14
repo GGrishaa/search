@@ -47,26 +47,25 @@ bool hash_table::insert(flat* Flat) {
 
 flat* hash_table::find(const string& key, size_t& size) const {
   size = 0;
-  flat* res = new flat[capacity_];
   unsigned long long h1 = my_hash1(key), h2 = my_hash2(key);
   size_t index = h1 % capacity_, step = (h2 % (capacity_ - 1)) + 1;
+  for (size_t k = 0; k < capacity_; ++k) {
+    size_t pos = (index + k * step) % capacity_;
+    if (table_[pos] && table_[pos]->get_owner() == key)
+      ++size;
+    else if (table_[pos] == nullptr)
+      break;
+  }
+  if (size == 0) return nullptr;
 
+  flat* res = new flat[size];
+  size_t idx = 0;
   for (size_t k = 0; k < capacity_; ++k) {
     size_t pos = (index + k * step) % capacity_;
     if (table_[pos] && table_[pos]->get_owner() == key) {
-      res[size] = *table_[pos];
-      ++size;
-    } else if (table_[pos] == nullptr) {
-      if (!size) {
-        delete[] res;
-        res = nullptr;
-      }
-      return res;
-    }
-  }
-  if (!size) {
-    delete[] res;
-    res = nullptr;
+      res[idx++] = *table_[pos];
+    } else if (table_[pos] == nullptr)
+      break;
   }
   return res;
 }
@@ -78,14 +77,14 @@ size_t fill_table(hash_table* table, flat* flats, const size_t& size) {
 }
 
 size_t count_collisions(flat* flats, const size_t& size) {
-  vector<unsigned long long> unique_hash;
+  std::unordered_set<unsigned long long> unique_hash;
   size_t collisions = 0;
   for (size_t i = 0; i < size; ++i) {
-    if (find(unique_hash.begin(), unique_hash.end(),
-             my_hash1(flats[i].get_owner())) != unique_hash.end())
+    auto h = my_hash1(flats[i].get_owner());
+    if (unique_hash.find(h) != unique_hash.end())
       ++collisions;
     else
-      unique_hash.push_back(my_hash1(flats[i].get_owner()));
+      unique_hash.insert(h);
   }
   return collisions;
 }
