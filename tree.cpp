@@ -92,21 +92,38 @@ void tree::add_elem(flat* new_elem) {
 
 flat* tree::find(const string& key, size_t& size) const {
   size = 0;
-  flat* res = new flat[this->size_];
-  if (top_free()) return res;
+  if (top_free()) return nullptr;
   leaf* cur = top_;
+  leaf* start = nullptr;
   while (true) {
     if (*cur == key) {
-      res[size] = *cur->get_here();
       ++size;
-      if (cur->left_free()) return res;
+      if (!start) start = cur;
+      if (cur->left_free()) break;
       cur = cur->get_left();
     } else if (*cur < key) {
-      if (cur->right_free()) return res;
+      if (cur->right_free()) break;
       cur = cur->get_right();
     } else {
-      if (cur->left_free()) return res;
+      if (cur->left_free()) break;
       cur = cur->get_left();
+    }
+  }
+  if (size == 0) return nullptr;
+  size_t c = 0;
+  flat* res = new flat[size];
+  while (true) {
+    if (*start == key) {
+      res[c] = *start->get_here();
+      ++c;
+      if (start->left_free()) return res;
+      start = start->get_left();
+    } else if (*start < key) {
+      if (start->right_free()) return res;
+      start = start->get_right();
+    } else {
+      if (start->left_free()) return res;
+      start = start->get_left();
     }
   }
 }
