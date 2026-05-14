@@ -1,13 +1,11 @@
 #ifndef HASH_HPP
 #define HASH_HPP
 
-#define P1 73
-#define P2 71
+#define P 73
 #define CAPACITY 100003
 #define alphabet "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ -"
 #define MOD ((1ULL << 61) - 1)
 
-#include <algorithm>
 #include <string>
 #include <unordered_set>
 
@@ -39,17 +37,6 @@ int index(const char& ch, const string& alph = alphabet);
  * @return целое 64-битное число
  */
 unsigned long long my_hash1(const string& str);
-
-/**
- * @brief Вторая пользовательская хэш-функция (используется для решения
- * коллизий)
- *
- * Функция проходит по символам строки s и считает следующим образом результат:
- * h(s) = s[0] + s[1] * p^1 + ... + s[n] * p^n, где p=71, n=длина входной строки
- * @param str - строка, по которой будет строиться хэш
- * @return целое 64-битное число
- */
-unsigned long long my_hash2(const string& str);
 
 /**
  * @brief Класс хэш-таблицы
@@ -92,7 +79,7 @@ class hash_table {
    * @param Flat - указатель на объект, который будет добавлен в хэш-таблицу
    * @return true, если удалось удачно добавить элемент, иначе false
    */
-  bool insert(flat* Flat);
+  void insert(flat* Flat);
   /**
    * @brief Поиск элементов по ключу
    *
@@ -104,9 +91,9 @@ class hash_table {
   flat* find(const string& key, size_t& size) const;
 
  private:
-  vector<flat*> table_;  ///< записи с указателями на экземпляры класса квартиры
-  size_t capacity_;      ///< количество выделяемой памяти для хранения объектов
-  size_t size_;          ///< реальное количество ненулевых добавленных объектов
+  flat** table_;
+  size_t* sizes_;
+  size_t capacity_;
 };
 
 /**
