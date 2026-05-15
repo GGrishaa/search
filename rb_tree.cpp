@@ -222,6 +222,7 @@ rb_node* rb_tree::rotate_right(rb_node* subroot) {
   }
   return new_subroot;
 }
+
 flat* rb_tree::find(const string& key, size_t& out_size) const {
   out_size = 0;
   if (!root_) return nullptr;
@@ -242,6 +243,7 @@ flat* rb_tree::find(const string& key, size_t& out_size) const {
   for (size_t i = 0; i < out_size; ++i) res[i] = cur->get_here()[i];
   return res;
 }
+
 void fill_rb_tree(rb_tree* tr, flat* flats, size_t size) {
   for (size_t i = 0; i < size; ++i) {
     tr->insert(flats + i);

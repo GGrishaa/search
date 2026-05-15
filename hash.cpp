@@ -6,7 +6,7 @@ int index(const char& ch, const string& alph) {
   return a + 1;
 }
 
-unsigned long long my_hash1(const string& str) {
+unsigned long long my_hash(const string& str) {
   unsigned long long hash = 0;
   for (size_t i = 0; i < str.length(); ++i)
     hash = (hash * P + index(str[i])) % MOD;
@@ -28,7 +28,7 @@ hash_table::~hash_table() {
 
 void hash_table::insert(flat* Flat) {
   string key = Flat->get_owner();
-  unsigned long long h = my_hash1(key);
+  unsigned long long h = my_hash(key);
   size_t index = h % capacity_;
   flat* arr = table_[index];
   size_t sz = sizes_[index];
@@ -44,7 +44,7 @@ void hash_table::insert(flat* Flat) {
 
 flat* hash_table::find(const string& key, size_t& size) const {
   size = 0;
-  unsigned long long h = my_hash1(key);
+  unsigned long long h = my_hash(key);
   size_t index = h % capacity_;
   flat* arr = table_[index];
   size_t sz = sizes_[index];
@@ -73,7 +73,7 @@ size_t count_collisions(flat* flats, const size_t& size) {
   std::unordered_set<unsigned long long> unique_hash;
   size_t collisions = 0;
   for (size_t i = 0; i < size; ++i) {
-    unsigned long long h = my_hash1(flats[i].get_owner());
+    unsigned long long h = my_hash(flats[i].get_owner());
     if (unique_hash.find(h) != unique_hash.end())
       ++collisions;
     else
