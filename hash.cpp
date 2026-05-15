@@ -70,14 +70,18 @@ size_t fill_table(hash_table* table, flat* flats, const size_t& size) {
 }
 
 size_t count_collisions(flat* flats, const size_t& size) {
-  std::unordered_set<unsigned long long> unique_hash;
-  size_t collisions = 0;
-  for (size_t i = 0; i < size; ++i) {
-    unsigned long long h = my_hash(flats[i].get_owner());
-    if (unique_hash.find(h) != unique_hash.end())
-      ++collisions;
-    else
-      unique_hash.insert(h);
-  }
-  return collisions;
+    std::unordered_map<unsigned long long, std::string> hash_to_key;
+    size_t collisions = 0;
+    for (size_t i = 0; i < size; ++i) {
+        unsigned long long h = my_hash(flats[i].get_owner());
+        auto it = hash_to_key.find(h);
+        if (it == hash_to_key.end()) {
+            hash_to_key[h] = flats[i].get_owner();
+        } else {
+            if (it->second != flats[i].get_owner()) {
+                ++collisions;
+            }
+        }
+    }
+    return collisions;
 }

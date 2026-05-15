@@ -32,7 +32,6 @@ ax1.plot(sizes, collisions, 'o-', color='red')
 ax1.set_xlabel('Размер массива')
 ax1.set_ylabel('Число коллизий')
 ax1.grid(True)
-ax1.set_yscale('log')
 ax1.set_title('Коллизии хеш-функции')
 
 ax2.plot(sizes, linear, 'o-', label='Линейный')
