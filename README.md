@@ -79,5 +79,6 @@
 
 ## Документация к коду
 Для генерации HTML-документации с помощью Doxygen выполните:
-```doxygen doxygen_config```
+`doxygen doxygen_config`
+
 После этого откройте файл docs/html/index.html в браузере.
