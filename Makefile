@@ -60,6 +60,6 @@ dox:
 	doxygen ./doxygen_config
 	open docs/html/index.html
 
-rebuild: clean all
+rebuild: clean gen all
 
 .PHONY = all search clean clang rebuild gen dox plot

@@ -135,7 +135,7 @@ void fix_time_with_fill(const string& filename) {
   fout << "Поиск с помощью бинарного дерева:\t\t" << tree_total / 1000.0
        << " мс" << endl;
 
-  hash_table table(prime * 3);
+  hash_table table(prime);
   auto start_hash = chrono::high_resolution_clock::now();
   fill_table(&table, flats, size1);
   flat* find_hash = table.find(key, size2);
@@ -223,7 +223,7 @@ void fix_time_no_fill(const string& filename) {
   fout << "Поиск с помощью бинарного дерева:\t\t" << tree_total / 1000.0
        << " мс" << endl;
 
-  hash_table table(prime * 3);
+  hash_table table(prime);
   fill_table(&table, flats, size1);
   auto start_hash = chrono::high_resolution_clock::now();
   flat* find_hash = table.find(key, size2);
