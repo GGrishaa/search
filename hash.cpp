@@ -13,8 +13,7 @@ unsigned long long my_hash1(const string& str) {
   return hash;
 }
 
-hash_table::hash_table(const size_t& capacity)
-    : capacity_(capacity) {
+hash_table::hash_table(const size_t& capacity) : capacity_(capacity) {
   table_ = new flat*[capacity_]();
   sizes_ = new size_t[capacity_]();
 }

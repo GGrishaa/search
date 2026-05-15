@@ -105,6 +105,7 @@ class rb_node {
    */
   void set_color(Color color);
 
+  size_t get_count() const;
   /**
    * @brief Оператор "Меньше" для сравнения узла и объекта квартиры
    *
@@ -156,12 +157,15 @@ class rb_node {
    */
   bool operator==(const string& key) const;
 
+  void add_flat(flat* f);
+
  private:
   rb_node* parent_;  ///< Указатель на узел-родитель
   flat* here_;       ///< Указатель на объект кваритиры
-  rb_node* left_;    ///< Указатель на левый узел
-  rb_node* right_;   ///< Указатель на правый узел
-  Color color_;      ///< Цвет узла (красный или черный)
+  size_t count_;
+  rb_node* left_;   ///< Указатель на левый узел
+  rb_node* right_;  ///< Указатель на правый узел
+  Color color_;     ///< Цвет узла (красный или черный)
 };
 
 /**

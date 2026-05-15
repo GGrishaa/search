@@ -2,11 +2,16 @@
 
 rb_node::rb_node(flat* here, rb_node* parent, rb_node* left, rb_node* right,
                  Color color)
-    : parent_(parent), here_(here), left_(left), right_(right), color_(color) {
-      };
+    : parent_(parent), left_(left), right_(right), color_(color), count_(0) {
+  if (here) {
+    here_ = new flat[1];
+    here_[0] = *here;
+    count_ = 1;
+  }
+};
 
 rb_node::~rb_node() {
-  delete here_;
+  delete[] here_;
   here_ = nullptr;
 }
 
@@ -34,34 +39,45 @@ Color rb_node::get_color() const { return color_; }
 
 void rb_node::set_color(Color color) { color_ = color; }
 
+size_t rb_node::get_count() const { return count_; }
+
 bool rb_node::operator<(flat* other) const {
-  if (!other || !this->here_) return false;
+  if (!other || !this->count_) return false;
   return this->here_->get_owner() < other->get_owner();
 }
 
 bool rb_node::operator<(const string& key) const {
-  if (!this->here_) return false;
+  if (!this->count_) return false;
   return this->here_->get_owner() < key;
 }
 
 bool rb_node::operator>=(flat* other) const {
-  if (!other || !this->here_) return false;
+  if (!other || !this->count_) return false;
   return this->here_->get_owner() >= other->get_owner();
 }
 
 bool rb_node::operator>=(const string& key) const {
-  if (!this->here_) return false;
+  if (!this->count_) return false;
   return this->here_->get_owner() >= key;
 }
 
 bool rb_node::operator==(flat* other) const {
-  if (!other || !this->here_) return false;
+  if (!other || !this->count_) return false;
   return this->here_->get_owner() == other->get_owner();
 }
 
 bool rb_node::operator==(const string& key) const {
-  if (!this->here_) return false;
+  if (!this->count_) return false;
   return this->here_->get_owner() == key;
+}
+
+void rb_node::add_flat(flat* f) {
+  flat* new_data = new flat[count_ + 1];
+  for (size_t i = 0; i < count_; ++i) new_data[i] = here_[i];
+  new_data[count_] = *f;
+  delete[] here_;
+  here_ = new_data;
+  ++count_;
 }
 
 rb_tree::rb_tree() : root_(nullptr), size_(0) {}
@@ -85,6 +101,11 @@ rb_node* rb_tree::insert(flat* new_elem) {
   }
   rb_node* cur = root_;
   while (true) {
+    if (*cur == new_elem) {
+      cur->add_flat(new_elem);
+      ++size_;
+      return cur;
+    }
     if (*cur < new_elem) {
       if (cur->right_free()) {
         rb_node* p = new rb_node(new flat(*new_elem), cur);
@@ -201,45 +222,26 @@ rb_node* rb_tree::rotate_right(rb_node* subroot) {
   }
   return new_subroot;
 }
+flat* rb_tree::find(const string& key, size_t& out_size) const {
+  out_size = 0;
+  if (!root_) return nullptr;
 
-flat* rb_tree::find(const string& key, size_t& size) const {
-  size = 0;
-  if (!size_) return nullptr;
   rb_node* cur = root_;
-  rb_node* start = nullptr;
-  while (true) {
-    if (*cur == key) {
-      ++size;
-      if (!start) start = cur;
-      if (cur->left_free()) break;
-      cur = cur->get_left();
-    } else if (*cur < key) {
-      if (cur->right_free()) break;
+  while (cur) {
+    if (*cur == key)
+      break;
+    else if (*cur < key)
       cur = cur->get_right();
-    } else {
-      if (cur->left_free()) break;
+    else
       cur = cur->get_left();
-    }
   }
-  if (size == 0) return nullptr;
-  size_t c = 0;
-  flat* res = new flat[size];
-  while (true) {
-    if (*start == key) {
-      res[c] = *start->get_here();
-      ++c;
-      if (start->left_free()) return res;
-      start = start->get_left();
-    } else if (*start < key) {
-      if (start->right_free()) return res;
-      start = start->get_right();
-    } else {
-      if (start->left_free()) return res;
-      start = start->get_left();
-    }
-  }
-}
+  if (!cur) return nullptr;
 
+  out_size = cur->get_count();
+  flat* res = new flat[out_size];
+  for (size_t i = 0; i < out_size; ++i) res[i] = cur->get_here()[i];
+  return res;
+}
 void fill_rb_tree(rb_tree* tr, flat* flats, size_t size) {
   for (size_t i = 0; i < size; ++i) {
     tr->insert(flats + i);
