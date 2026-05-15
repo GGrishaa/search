@@ -2,3 +2,5 @@
 CSV/*.csv
 *.o
 search
+*.docx
+*.pdf

@@ -168,9 +168,10 @@ void fix_time_with_fill(const string& filename) {
     find_mm[idx++] = it->second;
   }
   auto end_mm = chrono::high_resolution_clock::now();
-  double mm_time = chrono::duration<double, milli>(end_mm - start_mm).count();
-  fout << "Поиск с помощью std::multimap:\t\t\t" << mm_time << " мс" << endl
-       << endl;
+  size_t mm_total =
+      chrono::duration_cast<chrono::microseconds>(end_mm - start_mm).count();
+  fout << "Поиск с помощью std::multimap:\t\t\t" << mm_total / 1000.0 << " мс"
+       << endl << endl;
 
   fout.close();
   delete[] flats;
@@ -256,9 +257,10 @@ void fix_time_no_fill(const string& filename) {
     find_mm[idx++] = it->second;
   }
   auto end_mm = chrono::high_resolution_clock::now();
-  double mm_time = chrono::duration<double, milli>(end_mm - start_mm).count();
-  fout << "Поиск с помощью std::multimap:\t\t\t" << mm_time << " мс" << endl
-       << endl;
+  size_t mm_total =
+      chrono::duration_cast<chrono::microseconds>(end_mm - start_mm).count();
+  fout << "Поиск с помощью std::multimap:\t\t\t" << rb_total / 1000.0 << " мс"
+       << endl << endl;
 
   fout.close();
   delete[] flats;
